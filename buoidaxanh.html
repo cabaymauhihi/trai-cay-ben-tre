@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang web giới thiệu về cây bưởi Bến Tre, một biểu tượng của vùng đất miền Tây Việt Nam.">
+    <title>Bưởi Bến Tre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #23d5ab;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        
+        .parallax {
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .parallax-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .parallax h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .parallax p {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        /* Feature Cards Grid */
+        .information-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .information-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .information-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Swiper Carousel */
+        .swiper-container {
+            width: 100%;
+            height: 500px;
+            margin: 2rem 0;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+       
+        .scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    background: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation cho mũi tên */
+.scroll-top-btn i {
+    animation: bounceUpDown 2s infinite;
+}
+
+@keyframes bounceUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+        @media (max-width: 768px) {
+            .parallax h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+        }
+        .recipe-form-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-header i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.form-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label i {
+    color: #00ffca;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #00ffca;
+    box-shadow: 0 0 15px rgba(0, 255, 202, 0.3);
+}
+
+.file-upload .upload-area {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload .upload-area:hover {
+    border-color: #00ffca;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.upload-content i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.upload-content p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.file-name {
+    color: #00ffca;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(45deg, #00ffca, #00d4ff);
+    color: #000;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 255, 202, 0.3);
+}
+
+@media (max-width: 768px) {
+    .recipe-form-container {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+    </style>
+</head>
+<head>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background:#FFA07A;
+            color:white;
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        
+        nav {
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        
+        .parallax {
+            background-image: url('https://buoidaxanh.vn/wp-content/uploads/2016/08/hinh-vuon-buoi-15.jpg');
+            position: relative;
+        }
+
+        .parallax::before {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+        }
+
+        .parallax-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff,#FF66B2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleAnimation 1.5s ease-out forwards;
+        }
+
+        @keyframes titleAnimation {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        
+        .information-card {
+            position: relative;
+            overflow: hidden;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .information-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .information-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .information-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #FF10F0;
+        }
+
+        .information-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #00ffca;
+        }
+
+        
+        .swiper-container {
+            padding: 2rem;
+        }
+
+        .swiper-slide {
+            transform: scale(0.85);
+            transition: transform 0.5s;
+        }
+
+        .swiper-slide-active {
+            transform: scale(1);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00ffca;
+            margin-bottom: 1rem;
+        }
+
+       
+.scroll-top-btn {
+    width: 60px;
+    height: 60px;
+    background: white; /* Đổi màu nền thành trắng */
+    color: black; /* Đổi màu biểu tượng thành đen để dễ nhìn */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ddd; /* Thêm viền nhẹ để dễ nhìn hơn */
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-5px);
+    background: #f1f1f1; /* Màu hơi xám khi hover để tạo hiệu ứng */
+}
+
+        .scroll-top-btn:hover {
+            transform: translateY(-5px);
+        }
+        .recipe-form-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-header i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.form-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label i {
+    color: #00ffca;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #00ffca;
+    box-shadow: 0 0 15px rgba(0, 255, 202, 0.3);
+}
+
+.file-upload .upload-area {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload .upload-area:hover {
+    border-color: #00ffca;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.upload-content i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.upload-content p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.file-name {
+    color: #00ffca;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(45deg, #00ffca, #00d4ff);
+    color: #000;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 255, 202, 0.3);
+}
+
+@media (max-width: 768px) {
+    .recipe-form-container {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+.recipe-form-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-header i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.form-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label i {
+    color: #00ffca;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #00ffca;
+    box-shadow: 0 0 15px rgba(0, 255, 202, 0.3);
+}
+
+.file-upload .upload-area {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload .upload-area:hover {
+    border-color: #00ffca;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.upload-content i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.upload-content p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.file-name {
+    color: #00ffca;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(45deg, #00ffca, #00d4ff);
+    color: #000;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 255, 202, 0.3);
+}
+
+@media (max-width: 768px) {
+    .recipe-form-container {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+    </style>
+</head>
+
+
+
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#intro">Giới Thiệu</a></li>
+            <li><a href="#information">Thông Tin</a></li>
+            <li><a href="#gallery">Hình Ảnh</a></li>
+        </ul>
+    </nav>
+
+    <div class="parallax" id="intro">
+        <div class="parallax-content">
+            <h1 data-aos="fade-down"> Bưởi  Bến Tre</h1>
+            <p data-aos="fade-up">Khám phá và tìm hiểu về bưởi  Bến Tre</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="information" data-aos="fade-up">
+            <div class="information-grid">
+                <div class="information-card">
+           <h3>Công dụng và lợi ích sức khỏe của bưởi</h3>
+<p>
+    <ul>
+        <li><strong>Hỗ trợ giảm cân:</strong> 
+            Bưởi ít calo nhưng giàu chất xơ, giúp tạo cảm giác no lâu, hỗ trợ kiểm soát cân nặng và thúc đẩy quá trình trao đổi chất.</li>
+        
+        <li><strong>Tăng cường hệ miễn dịch:</strong> 
+            Giàu vitamin C và các chất chống oxy hóa, giúp cơ thể chống lại vi khuẩn, virus và giảm nguy cơ mắc bệnh.</li>
+        
+        <li><strong>Cải thiện sức khỏe tim mạch:</strong> 
+            Hỗ trợ giảm cholesterol xấu (LDL), tăng cholesterol tốt (HDL) và giúp điều hòa huyết áp nhờ hàm lượng kali dồi dào.</li>
+        
+        <li><strong>Kiểm soát lượng đường trong máu:</strong> 
+            Chỉ số đường huyết thấp, giúp duy trì mức đường huyết ổn định, đặc biệt tốt cho người mắc tiểu đường loại 2.</li>
+        
+        <li><strong>Hỗ trợ tiêu hóa:</strong> 
+            Chứa nhiều chất xơ, giúp ngăn ngừa táo bón, thúc đẩy quá trình tiêu hóa và duy trì hệ vi sinh đường ruột khỏe mạnh.</li>
+        
+        <li><strong>Chống oxy hóa, làm đẹp da:</strong> 
+            Các chất chống oxy hóa như vitamin C, flavonoid giúp làm sáng da, ngăn ngừa lão hóa và giảm nếp nhăn.</li>
+        
+        <li><strong>Giảm nguy cơ ung thư:</strong> 
+            Chứa lycopene và naringenin, giúp bảo vệ tế bào khỏi tổn thương và giảm nguy cơ mắc một số loại ung thư.</li>
+        
+        <li><strong>Thanh lọc cơ thể và hỗ trợ gan:</strong> 
+            Hỗ trợ gan thải độc hiệu quả, giúp cơ thể khỏe mạnh và cải thiện chức năng gan.</li>
+    </ul></p>
+    <img src="https://hoangphatfruit.com/vnt_upload/product/10_2022/buoi_3.jpg" alt="Bưởi da xanh" style="width: 500px;">
+</div>
+                <div class="information-card">
+                   <h3>Cách chế biến và các món ăn được làm từ bưởi</h3>
+<ul>
+    <li><strong>Nước ép bưởi:</strong></li>
+    <p>Nguyên liệu: Bưởi, mật ong (hoặc đường), đá viên.</p>
+    <p>Cách làm: Tách múi bưởi, bỏ hạt, ép lấy nước. Thêm mật ong (hoặc đường) và đá viên, khuấy đều và thưởng thức.</p>
+
+    <li><strong>Gỏi bưởi tôm thịt:</strong></li>
+    <p>Nguyên liệu: Bưởi, tôm, thịt heo, rau thơm, hành phi, đậu phộng, nước mắm chua ngọt.</p>
+    <p>Cách làm: Luộc tôm và thịt, thái mỏng. Trộn với bưởi bóc tép, rau thơm, nước mắm chua ngọt. Rắc đậu phộng và hành phi rồi trộn đều.</p>
+
+    <li><strong>Chè bưởi:</strong></li>
+    <p>Nguyên liệu: Vỏ bưởi, đậu xanh, đường, nước cốt dừa, bột năng.</p>
+    <p>Cách làm: Gọt vỏ bưởi, ngâm nước muối, luộc sơ rồi trộn đường, bột năng. Nấu với đậu xanh, thêm nước cốt dừa và thưởng thức.</p>
+
+    <li><strong>Mứt vỏ bưởi:</strong></li>
+    <p>Nguyên liệu: Vỏ bưởi, đường, nước cốt chanh.</p>
+    <p>Cách làm: Cắt vỏ bưởi thành sợi, ngâm muối, luộc sơ. Rim với đường và nước cốt chanh đến khi dẻo, để nguội và bảo quản.</p>
+
+    <li><strong>Salad bưởi:</strong></li>
+    <p>Nguyên liệu: Bưởi, rau xà lách, hạnh nhân, sốt mè rang hoặc sốt chanh mật ong.</p>
+    <p>Cách làm: Tách bưởi thành tép nhỏ, trộn với rau xà lách, hạnh nhân. Rưới sốt và trộn đều trước khi thưởng thức.</p>
+
+    <li><strong>Trà vỏ bưởi mật ong:</strong></li>
+    <p>Nguyên liệu: Vỏ bưởi, mật ong, đường phèn.</p>
+    <p>Cách làm: Thái nhỏ vỏ bưởi, ngâm muối rồi đun với đường phèn đến khi sệt lại. Cho mật ong vào, khuấy đều và bảo quản trong hũ. Khi uống, pha với nước ấm.</p>
+</ul>
+<img src="https://www.btaskee.com/wp-content/uploads/2023/06/nuoc-ep-buoi-chua-nhieu-vitamin-c.jpg" alt="Nước ép bưởi" style="width: 500px;">
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" data-aos="fade-up">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://chanhthu.com/wp-content/uploads/2024/03/chanh-thu-buoi-da-xanh-2.jpg" alt="Bưởi da xanh">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://nongthonmoi.hatinh.gov.vn/uploads/news/2021_01/ky-thuat-trong-buoi-da-xanh.jpg" alt="Bưởi da xanh 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://buoidaxanh.vn/wp-content/uploads/2016/08/hinh-cay-buoi-5.jpg" alt="Bưởi da xanh 3">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+    </div>
+<button class="scroll-top-btn" onclick="scrollToTop()" title="Lên đầu trang">
+    <i class="fas fa-arrow-up"></i>
+</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+       
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+       
+        const swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            }
+        });
+
+        
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        
+        const scrollTopBtn = document.querySelector('.scroll-top-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <style>
+        /* Định dạng cho liên kết */
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #333; /* Màu nền xám đậm */
+            color: white; /* Màu chữ trắng */
+            font-size: 16px;
+            border-radius: 8px; /* Bo góc đẹp */
+            border: 2px solid #333; /* Khung xung quanh */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+        }
+
+        /* Hiệu ứng khi di chuột vào */
+        a:hover {
+            background-color: #555; /* Màu nền sáng hơn khi hover */
+            border-color: #555; /* Thay đổi màu khung khi hover */
+            transform: translateY(-5px); /* Nâng liên kết lên khi hover */
+        }
+    </style>
+</head>
+ <section id="share-recipe" data-aos="fade-up">
+    <div class="recipe-form-container">
+        <div class="form-header">
+            <i class="fas fa-utensils"></i>
+            <h2>Chia Sẻ Công Thức Của Bạn</h2>
+            <p>Hãy chia sẻ những công thức tuyệt vời từ dừa xiêm của bạn</p>
+        </div>
+
+        <form id="recipeForm" class="recipe-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="recipeName">
+                        <i class="fas fa-hamburger"></i> Tên Món
+                    </label>
+                    <input type="text" id="recipeName" placeholder="VD: Sinh tố dừa xiêm" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recipeCategory">
+                        <i class="fas fa-tags"></i> Phân Loại
+                    </label>
+                    <select id="recipeCategory" required>
+                        <option value="">Chọn loại món</option>
+                        <option value="drink">Đồ uống</option>
+                        <option value="dessert">Món tráng miệng</option>
+                        <option value="main">Món chính</option>
+                        <option value="other">Khác</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ingredients">
+                    <i class="fas fa-list"></i> Nguyên Liệu
+                </label>
+                <textarea id="ingredients" placeholder="Liệt kê từng nguyên liệu trên một dòng" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="instructions">
+                    <i class="fas fa-mortar-pestle"></i> Cách Làm
+                </label>
+                <textarea id="instructions" placeholder="Mô tả chi tiết các bước thực hiện" rows="6" required></textarea>
+            </div>
+
+            <div class="form-group file-upload">
+                <label for="recipeImage">
+                    <i class="fas fa-camera"></i> Hình Ảnh Món Ăn
+                </label>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="recipeImage" accept="image/*" hidden>
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Kéo thả ảnh vào đây hoặc click để chọn</p>
+                        <span class="file-name"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Chia Sẻ Công Thức
+            </button>
+        </form>
+    </div>
+</section>
+<script>
+   // Thêm vào phần script
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('recipeImage');
+    const fileName = uploadArea.querySelector('.file-name');
+
+    // Xử lý kéo thả file
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.style.borderColor = '#00ffca';
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        handleFile(file);
+    });
+
+    // Xử lý click chọn file
+    uploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        handleFile(file);
+    });
+
+    function handleFile(file) {
+        if (file && file.type.startsWith('image/')) {
+            fileName.textContent = file.name;
+            uploadArea.style.borderColor = '#00ffca';
+        } else {
+            alert('Vui lòng chọn file hình ảnh!');
+            fileName.textContent = '';
+        }
+    }
+
+    // Xử lý submit form
+    document.getElementById('recipeForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Hiệu ứng loading khi submit
+        const submitBtn = this.querySelector('.submit-btn');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang gửi...';
+        submitBtn.disabled = true;
+
+        // Giả lập gửi form
+        setTimeout(() => {
+            alert('Cảm ơn bạn đã chia sẻ công thức! Chúng tôi sẽ xem xét và đăng tải sớm nhất có thể.');
+            this.reset();
+            fileName.textContent = '';
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Chia Sẻ Công Thức';
+            submitBtn.disabled = false;
+        }, 1500);
+    });
+});
+</script>
+<body>
+
+    <a href="index.html">Quay Về Trang Chủ</a>
+
+</body>
+</body>
+</html>

@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang web giới thiệu về cây dừa Bến Tre, một biểu tượng của vùng đất miền Tây Việt Nam.">
+    <title>Dừa Bến Tre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #23d5ab;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        
+        .parallax {
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .parallax-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .parallax h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .parallax p {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        /* Feature Cards Grid */
+        .information-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .information-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .information-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Swiper Carousel */
+        .swiper-container {
+            width: 100%;
+            height: 500px;
+            margin: 2rem 0;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+       
+        /* Cập nhật CSS cho nút scroll-top */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    background: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation cho mũi tên */
+.scroll-top-btn i {
+    animation: bounceUpDown 2s infinite;
+}
+
+@keyframes bounceUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+        @media (max-width: 768px) {
+            .parallax h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<head>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0a4d68, #088395, #05bfdb, #00ffca);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        
+        nav {
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        
+        .parallax {
+            background-image: url('https://images.vietnamtourism.gov.vn/vn/images/2014/AnhInternet/DuaBenTre.jpg');
+            position: relative;
+        }
+
+        .parallax::before {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+        }
+
+        .parallax-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, #00ffca);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleAnimation 1.5s ease-out forwards;
+        }
+
+        @keyframes titleAnimation {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        
+        .information-card {
+            position: relative;
+            overflow: hidden;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .information-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .information-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .information-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #00ffca;
+        }
+
+        .information-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #00ffca;
+        }
+
+        
+        .swiper-container {
+            padding: 2rem;
+        }
+
+        .swiper-slide {
+            transform: scale(0.85);
+            transition: transform 0.5s;
+        }
+
+        .swiper-slide-active {
+            transform: scale(1);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00ffca;
+            margin-bottom: 1rem;
+        }
+        .scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    background: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation cho mũi tên */
+.scroll-top-btn i {
+    animation: bounceUpDown 2s infinite;
+}
+
+@keyframes bounceUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+        @media (max-width: 768px) {
+            .parallax h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+        }
+        .recipe-form-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-header i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.form-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label i {
+    color: #00ffca;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #00ffca;
+    box-shadow: 0 0 15px rgba(0, 255, 202, 0.3);
+}
+
+.file-upload .upload-area {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload .upload-area:hover {
+    border-color: #00ffca;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.upload-content i {
+    font-size: 3rem;
+    color: #00ffca;
+    margin-bottom: 1rem;
+}
+
+.upload-content p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.file-name {
+    color: #00ffca;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(45deg, #00ffca, #00d4ff);
+    color: #000;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 255, 202, 0.3);
+}
+
+@media (max-width: 768px) {
+    .recipe-form-container {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+</style>
+</head>
+
+
+
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#intro">Giới Thiệu</a></li>
+            <li><a href="#information">Thông Tin</a></li>
+            <li><a href="#gallery">Hình Ảnh</a></li>
+        </ul>
+    </nav>
+
+    <div class="parallax" id="intro">
+        <div class="parallax-content">
+            <h1 data-aos="fade-down"> Dừa Xiêm Bến Tre</h1>
+            <p data-aos="fade-up">Khám phá và tìm hiểu về dừa xiêm Bến Tre</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="information" data-aos="fade-up">
+            <div class="information-grid">
+                <div class="information-card">
+                    <h3>Công dụng và lợi ích sức khỏe của dừa xiêm xanh</h3>
+                    <p><ul><li><strong>Giải khát và bổ sung điện giải</strong>
+Nước dừa xiêm xanh có vị ngọt tự nhiên, giàu khoáng chất như kali, natri, magie, giúp bù nước và cân bằng điện giải, đặc biệt có lợi khi cơ thể bị mất nước do vận động, nắng nóng hoặc tiêu chảy.</li>
+<li><strong>Tốt cho hệ tiêu hóa</strong>
+Giúp làm dịu dạ dày, hỗ trợ tiêu hóa, giảm táo bón nhờ chứa enzym tự nhiên.
+Có tính kháng khuẩn nhẹ, giúp làm sạch đường ruột.</li>
+<li><strong>Tăng cường sức khỏe tim mạch</strong>
+Nước dừa giúp giảm huyết áp nhờ chứa kali và các chất chống oxy hóa tự nhiên.
+Hỗ trợ cải thiện lưu thông máu, giảm nguy cơ mắc bệnh tim mạch.</li>
+ <li><strong>Làm đẹp da và tóc</strong>
+Dừa xiêm xanh có chứa cytokinins, giúp chống lão hóa da.
+Dưỡng ẩm và làm sáng da khi dùng làm mặt nạ.
+Nước dừa có thể dùng để gội đầu, giúp tóc mềm mượt và chắc khỏe.</li>
+<li><strong>Giúp giảm cân</strong>
+Ít calo, không chứa chất béo, giúp kiểm soát cân nặng.
+Tạo cảm giác no lâu, giảm thèm ăn.</li>
+<li><strong>Hỗ trợ tăng cường miễn dịch</strong>
+Giàu axit lauric – một chất có đặc tính kháng khuẩn, giúp tăng sức đề kháng.
+Hỗ trợ cơ thể chống lại virus, vi khuẩn.
+               <li> <strong>Tốt cho phụ nữ mang thai</strong>
+Giúp giảm triệu chứng ốm nghén, bổ sung nước và khoáng chất.
+Ngăn ngừa táo bón và nhiễm trùng đường tiết niệu ở mẹ bầu.</li>
+<li><strong>Cải thiện năng lượng và tinh thần</strong>
+Cung cấp nguồn năng lượng tự nhiên, giúp giảm mệt mỏi, căng thẳng.
+Giúp tinh thần tỉnh táo, cải thiện tâm trạng nhờ các khoáng chất thiết yếu.</li></ul></p>
+<img src="https://vuaduatiengiang.com/thumbs/540x540x1/upload/product/dua2-1020-5402.jpg" alt="Dừa xiêm xanh" style="width: 500px;">
+</div>
+                <div class="information-card">
+                    <h3>Cách chế biến và các món ăn được làm từ dừa xiêm</h3>
+                    <p><ul><li>Món giải khát từ dừa xiêm</li>
+<strong>Nước dừa tắc:</strong>
+<p>Nguyên liệu: 1 trái dừa xiêm, 1-2 quả tắc (quất), đường phèn, đá viên.</p>
+<p>Cách làm: Vắt nước tắc vào ly, thêm nước dừa tươi, đường phèn, khuấy đều và cho đá vào.</p>
+<strong>Thạch dừa xiêm</strong>
+<p>Nguyên liệu: 1 trái dừa xiêm, bột rau câu, đường, nước cốt dừa.</p>
+<p>Cách làm:
+Lấy nước dừa, cho bột rau câu vào khuấy đều.
+Đun sôi hỗn hợp, thêm đường và nước cốt dừa.
+Đổ vào trái dừa, để nguội rồi cho vào tủ lạnh đến khi đông lại.</p>
+<strong>Sinh tố dừa xiêm:</strong>
+<p>Nguyên liệu: Cơm dừa non, nước dừa, sữa đặc, đá bào.</p>
+<p>Cách làm: Xay nhuyễn tất cả nguyên liệu rồi thưởng thức.</p>
+<li> Món ngọt từ dừa xiêm</li>
+<strong>Chè dừa dầm:</strong>
+<p>Nguyên liệu: Cơm dừa non, nước dừa, thạch dừa, sữa đặc, trân châu.</p>
+<p>Cách làm: Trộn tất cả nguyên liệu với đá bào, thêm nước cốt dừa là có ngay món chè béo ngậy.</p>
+<strong>Kem dừa xiêm:</strong>
+<p>Nguyên liệu: Cơm dừa non, nước dừa, sữa tươi, kem tươi, đường.</p>
+<p>Cách làm: Xay nhuyễn nguyên liệu, để lạnh rồi đánh bông, sau đó đông lạnh khoảng 6 tiếng.</p>
+<li> Món mặn từ dừa xiêm</li>
+<strong>Gà kho nước dừa:</strong>
+<p>Nguyên liệu: Gà ta, nước dừa, hành tỏi, nước mắm, tiêu, ớt.</p>
+<p>Cách làm:
+Ướp gà với nước mắm, tiêu, hành tỏi.
+Xào săn rồi cho nước dừa vào kho đến khi gà thấm vị, nước sệt lại.</p>
+<strong>Tôm rang nước dừa:</strong>
+<p>Nguyên liệu: Tôm, nước dừa, hành tím, nước mắm, tiêu.</p>
+<p>Cách làm:
+Phi hành tím, cho tôm vào xào.
+Đổ nước dừa vào, rim nhỏ lửa cho tôm thấm gia vị.</p>
+<strong>Cá kho nước dừa:</strong>
+<p>Nguyên liệu: Cá lóc hoặc cá basa, nước dừa, hành tỏi, nước mắm, tiêu, ớt.</p>
+<p>Cách làm: Kho cá với nước dừa đến khi thịt cá mềm, nước sốt sệt lại.</p></li></ul></p>
+<img src="https://lypham.vn/wp-content/uploads/2024/10/dua-tac-xi-muoi.jpg" alt="Nước dừa tắc" style="width: 500px;">
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" data-aos="fade-up">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://media.loveitopcdn.com/22928/thumb/dua-xiem-xanh-ben-tre.jpg" alt="Cây Dừa Bến Tre">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://scontent.iocvnpt.com/resources/portal/Images/BTE/superadminportal.bte/2023/03_2023/dua_trong_du_lich_ben_tre_2023_1632023_1_232770403.jpg" alt="Cây Dừa Bến Tre 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://static.kinhtedothi.vn/w960/images/upload/2024/09/17/hinh-anh-cay-dua-dep-7406.jpg" alt="Cây Dừa Bến Tre 3">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Cập nhật HTML cho nút scroll-top -->
+<button class="scroll-top-btn" onclick="scrollToTop()" title="Lên đầu trang">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+       
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+       
+        const swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            }
+        });
+
+        
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        
+        const scrollTopBtn = document.querySelector('.scroll-top-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <style>
+        /* Định dạng cho liên kết */
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #333; /* Màu nền xám đậm */
+            color: white; /* Màu chữ trắng */
+            font-size: 16px;
+            border-radius: 8px; /* Bo góc đẹp */
+            border: 2px solid #333; /* Khung xung quanh */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+        }
+
+        /* Hiệu ứng khi di chuột vào */
+        a:hover {
+            background-color: #555; /* Màu nền sáng hơn khi hover */
+            border-color: #555; /* Thay đổi màu khung khi hover */
+            transform: translateY(-5px); /* Nâng liên kết lên khi hover */
+        }
+    </style>
+</head>
+<section id="share-recipe" data-aos="fade-up">
+    <div class="recipe-form-container">
+        <div class="form-header">
+            <i class="fas fa-utensils"></i>
+            <h2>Chia Sẻ Công Thức Của Bạn</h2>
+            <p>Hãy chia sẻ những công thức tuyệt vời từ dừa xiêm của bạn</p>
+        </div>
+
+        <form id="recipeForm" class="recipe-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="recipeName">
+                        <i class="fas fa-hamburger"></i> Tên Món
+                    </label>
+                    <input type="text" id="recipeName" placeholder="VD: Sinh tố dừa xiêm" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recipeCategory">
+                        <i class="fas fa-tags"></i> Phân Loại
+                    </label>
+                    <select id="recipeCategory" required>
+                        <option value="">Chọn loại món</option>
+                        <option value="drink">Đồ uống</option>
+                        <option value="dessert">Món tráng miệng</option>
+                        <option value="main">Món chính</option>
+                        <option value="other">Khác</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ingredients">
+                    <i class="fas fa-list"></i> Nguyên Liệu
+                </label>
+                <textarea id="ingredients" placeholder="Liệt kê từng nguyên liệu trên một dòng" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="instructions">
+                    <i class="fas fa-mortar-pestle"></i> Cách Làm
+                </label>
+                <textarea id="instructions" placeholder="Mô tả chi tiết các bước thực hiện" rows="6" required></textarea>
+            </div>
+
+            <div class="form-group file-upload">
+                <label for="recipeImage">
+                    <i class="fas fa-camera"></i> Hình Ảnh Món Ăn
+                </label>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="recipeImage" accept="image/*" hidden>
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Kéo thả ảnh vào đây hoặc click để chọn</p>
+                        <span class="file-name"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Chia Sẻ Công Thức
+            </button>
+        </form>
+    </div>
+</section>
+<script>
+   // Thêm vào phần script
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('recipeImage');
+    const fileName = uploadArea.querySelector('.file-name');
+
+    // Xử lý kéo thả file
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.style.borderColor = '#00ffca';
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        handleFile(file);
+    });
+
+    // Xử lý click chọn file
+    uploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        handleFile(file);
+    });
+
+    function handleFile(file) {
+        if (file && file.type.startsWith('image/')) {
+            fileName.textContent = file.name;
+            uploadArea.style.borderColor = '#00ffca';
+        } else {
+            alert('Vui lòng chọn file hình ảnh!');
+            fileName.textContent = '';
+        }
+    }
+
+    // Xử lý submit form
+    document.getElementById('recipeForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Hiệu ứng loading khi submit
+        const submitBtn = this.querySelector('.submit-btn');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang gửi...';
+        submitBtn.disabled = true;
+
+        // Giả lập gửi form
+        setTimeout(() => {
+            alert('Cảm ơn bạn đã chia sẻ công thức! Chúng tôi sẽ xem xét và đăng tải sớm nhất có thể.');
+            this.reset();
+            fileName.textContent = '';
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Chia Sẻ Công Thức';
+            submitBtn.disabled = false;
+        }, 1500);
+    });
+});
+</script>
+<body>
+
+    <a href="index.html">Quay Về Trang Chủ</a>
+
+</body>
+</body>
+</html> 
